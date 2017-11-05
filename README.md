@@ -7,7 +7,7 @@ compay
 execute query below
 
 create table company(
-empid int not null primary key,
+empid serial,
 name text not null,
 age int,
 joining date not null,
