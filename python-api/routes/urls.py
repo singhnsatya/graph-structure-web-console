@@ -1,21 +1,15 @@
-from flask import Flask, jsonify, request
+from flask import Blueprint, jsonify, request
+from helpers.connection import connectDB
 import psycopg2
 import json
 
-app = Flask(__name__)
+routes = Blueprint('routes', __name__,)
 
-def connectDB():
-	try:
-		return psycopg2.connect(
-		"dbname='graph' host='localhost' user='postgres' password='graph'")
-	except:
-		print('cannot connect')
-
-@app.route('/')
+@routes.route('/')
 def index():
 	return 'INDEX'
 
-@app.route('/insertData', methods=['GET'])
+@routes.route('/insertData', methods=['GET'])
 def test():
 	try:
 		conn = connectDB()
@@ -27,7 +21,7 @@ def test():
 	except Exception as e:
 		return jsonify({"success": False, "error": "Data insertion failed"})
 
-@app.route('/addEmployee', methods=['POST'])
+@routes.route('/addEmployee', methods=['POST'])
 def addEmp():
 	try:
 		conn = connectDB()
@@ -39,7 +33,7 @@ def addEmp():
 	except Exception as e:
 		return jsonify({"success": False, "error": "Invalid data"})
 
-@app.route('/subtree', methods=['get'])
+@routes.route('/subtree', methods=['get'])
 def subtree():
 	try:
 		conn = connectDB()
@@ -57,8 +51,3 @@ def subtree():
 		return jsonify({'success': True})
 	except Exception as e:
 		raise e
-
-
-if __name__ == '__main__':
-	connectDB()
-	app.run(debug=True)
