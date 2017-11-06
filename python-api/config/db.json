@@ -1,0 +1,8 @@
+{
+	"local": {
+		"dbname": "graph",
+		"host": "localhost",
+		"user": "postgres",
+		"password": "graph"
+	}
+}

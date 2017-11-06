@@ -36,14 +36,15 @@ def addEmp():
 @routes.route('/subtree', methods=['get'])
 def subtree():
 	try:
+		eid = 1
 		conn = connectDB()
 		cursor = conn.cursor()
 		query = """with recursive subs as ( select empid, parent, name, age, joining 
-		from company where empid = 1 union select
+		from company where empid = %s union select
 		e.empid, e.parent, e.name, e.age, e.joining
 		from company e inner join subs s on s.empid = e.parent )
 		select * from subs;"""
-		cursor.execute(query)
+		cursor.execute(query, [eid])
 		subtree = cursor.fetchall()
 		for sub in subtree:
 			print(sub)
