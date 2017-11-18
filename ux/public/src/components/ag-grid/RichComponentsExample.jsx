@@ -4,7 +4,15 @@ import {AgGridReact} from "ag-grid-react";
 import RatioRenderer from "./RatioRenderer.jsx";
 import ClickableRenderer from "./ClickableRenderer.jsx";
 
-export default class RichComponentsExample extends Component {
+import { observer, inject } from 'mobx-react';
+
+// const RichComponentsExample = observer()
+// export default class RichComponentsExample extends Component {
+
+
+
+// const Com = () => {
+ class RichComponentsExample extends Component {
     constructor(props) {
         super(props);
 
@@ -90,6 +98,7 @@ export default class RichComponentsExample extends Component {
     }
 
     render() {
+        console.log('-- - -- - - -props', this.props)
         return (
             <div style={{height: 370, width: 900}} className="ag-fresh">
                 <AgGridReact
@@ -105,3 +114,12 @@ export default class RichComponentsExample extends Component {
         );
     }
 };
+
+// }
+
+const Com = inject('store')(observer(RichComponentsExample))
+export default Com
+
+/*export default (store) => {
+  return (target) => Com(target, store);
+};*/

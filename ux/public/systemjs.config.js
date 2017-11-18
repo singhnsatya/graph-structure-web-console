@@ -19,7 +19,10 @@
                 'react-redux': 'npm:react-redux@5.0.6',
                 'prop-types': 'npm:prop-types',
 
-                app: appLocation + 'app'
+                app: appLocation + 'app',
+                //mobx
+                'mobx': 'npm:mobx@^3.3.1',
+                'mobx-react': 'npm:mobx-react@^4.3.4',
             },
             systemJsMap
         ), // systemJsMap comes from index.html
@@ -54,7 +57,12 @@
         meta: {
             '*.jsx': {
                 babelOptions: {
-                    react: true
+                    react: true,
+                    "optional": [
+                      "runtime",
+                      "optimisation.modules.system",
+                      "es7.decorators"
+                    ]
                 }
             }
         }
